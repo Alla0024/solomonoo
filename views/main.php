@@ -5,6 +5,7 @@
 
  $category_id =  $_GET['category'];
  $product =  $_GET['product'];
+
  if(!empty($category_id)) {
      if ($data['option'] == 'price') {
          $products = Product::getProductsByPrice($category_id);
@@ -18,10 +19,10 @@
  }
  ?>
  <div id="res"></div>
+
  <div class="intro">
     <div class="container">
-<?php
-        foreach ($products as $elem) { ?>
+    <?php foreach ($products as $elem) { ?>
             <div id="result"></div>
         <section style="background-color: #eee;">
             <div class="container py-5">
@@ -53,10 +54,8 @@
                                 <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
                                     <a href="#!" class="text-dark fw-bold">Cancel</a>
                                     <button type="button" id="<?=$elem[0] ?>" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Buy now</button>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -65,11 +64,9 @@
 
      <?php } ?>
 
-
     </div>
  </div>
  <script>
-
      $(document).ready(function () {
          $('.btn-primary').on('click', function () {
              var id = $(this)[0].id;
@@ -78,6 +75,4 @@
              });
          });
      });
-
-
  </script>

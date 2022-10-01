@@ -1,5 +1,4 @@
 <?php
-
 class Task
 {
     function print_array($array){
