@@ -4,6 +4,7 @@
          'local' => $_POST['local']];
 
  $category_id =  $_GET['category'];
+ $product =  $_GET['product'];
  if(!empty($category_id)) {
      if ($data['option'] == 'price') {
          $products = Product::getProductsByPrice($category_id);
@@ -16,6 +17,7 @@
      }
  }
  ?>
+ <div id="res"></div>
  <div class="intro">
     <div class="container">
 <?php
@@ -50,7 +52,8 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
                                     <a href="#!" class="text-dark fw-bold">Cancel</a>
-                                    <button type="button" id="<?=$elem[0] ?>" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">Buy now</button>
+                                    <button type="button" id="<?=$elem[0] ?>" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Buy now</button>
+
                                 </div>
                             </div>
 
@@ -60,22 +63,21 @@
             </div>
         </section>
 
-            <?php } ?>
+     <?php } ?>
+
+
     </div>
-</div>
+ </div>
  <script>
 
      $(document).ready(function () {
-         $('.btn').on('click', function () {
+         $('.btn-primary').on('click', function () {
              var id = $(this)[0].id;
-             $.get("index.php", {product:id}, function (){
-                 $("#result").load("index.php?product=" + id);
+             $.get("modal.php", {product:id}, function (){
+                 $("#res").load("modal.php?product=" + id);
              });
          });
      });
-     // function hiddeRes() {
-     //     var x = document.getElementById("resul.myslide");
-     //
-     //     x.style.display = "none";
-     // }
+
+
  </script>

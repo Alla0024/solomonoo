@@ -7,7 +7,7 @@ $categories = Category::getAllCategories(); ?>
         $category_id = $elem['id'];
         $counts = Product::getProductCount($category_id);
         foreach ($counts as $count){ ?>
-            <a id="<?= $elem['id'] ?>" class="category" onclick="hiddeDiv()" href="#"><?= $elem['name'] .' ('. $count.')'?></a>
+            <a id="<?= $elem['id'] ?>" class="category" href="#"><?= $elem['name'] .' ('. $count.')'?></a>
          <?php } } ?>
 </div>
 <div class="mysort" id="mysort">
@@ -26,8 +26,8 @@ $categories = Category::getAllCategories(); ?>
     $(document).ready(function () {
         $('.category').on('click', function () {
             var id = $(this)[0].id;
-            $.get("index.php", {category:id}, function (){
-                $("#box").load("index.php?category=" + id);
+            $.get("main.php", {category:id}, function (){
+                $("#box").load("main.php?category=" + id);
                 localStorage.category = (id);
             });
         });
@@ -38,7 +38,7 @@ $categories = Category::getAllCategories(); ?>
             var selectedSort = $('#sort option:selected').val();
             var id = window.localStorage.category;
             $.ajax({
-                url:"index.php?category="+ id ,
+                url:"main.php?category="+ id ,
                 method:"POST",
                 data: {option:selectedSort, local:id},
                 success: function (response) {
@@ -55,10 +55,5 @@ $categories = Category::getAllCategories(); ?>
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
-    }
-    function hiddeDiv() {
-        var x = document.getElementById("mysort");
-
-        x.style.display = "none";
     }
 </script>
