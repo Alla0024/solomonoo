@@ -2,14 +2,23 @@
 
 class Task
 {
+    function print_array($array){
+       echo "<pre>" .
+        print_r($array, true)
+        . "<pre>" ;
+    }
     public static function getAllData()
     {
         $mysqli = dbConnect();
-        $class = $mysqli->prepare("SELECT * FROM task");
-        $class->execute();
-        return $class->get_result()->fetch_all(MYSQLI_ASSOC);
+        $query = "SELECT * FROM task";
+        $res = mysqli_query($mysqli, $query);
+        $arr_cat = array();
+        while($row = mysqli_fetch_assoc($res)) {
+            $arr_cat[$row['categories_id']] = $row;
+        }
+         return$arr_cat;
     }
-    function mapTree($dataset){
+    public static function mapTree($dataset){
         $tree = array();
 
         foreach ($dataset as $id=>&$node){
@@ -20,6 +29,17 @@ class Task
             }
         }
         return $tree;
+    }
+    public static function categories_to_string($data){
+        foreach ($data as $item){
+            $string .= Task::categories_to_template($item);
+        }
+        return $string ;
+    }
+    public static function categories_to_template($category){
+        ob_start();
+        include 'template/category.php';
+        return ob_get_clean();
     }
 
 }

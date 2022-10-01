@@ -40,3 +40,13 @@ body {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+.accordion{
+    float: left;
+    width: 680px;
+}
+ul{
+    list-style: none;
+}
+.category ul{
+    padding-left: 20px;
+}
